@@ -1,0 +1,20 @@
+<apex:page standardController="Account" recordSetVar="accs" extensions="vfChallenge9">
+    <apex:form>
+        <apex:pageBlock>
+
+            <apex:repeat value="{!accList}" var="acc">
+                <apex:outputText value="Account Name: "/>
+                <apex:outputText value="{!acc.Name}" id="theName"/>
+                <br/>
+                <apex:outputText value="Contacts: "/>                
+                <apex:repeat value="{!acc.Contacts}" var="con">
+                    <apex:outputText value="{!con.Name}" id="theContact"/>
+                    <apex:outputText value=", "/>
+                    <span/>
+                </apex:repeat>
+                <br/>
+                <br/>
+            </apex:repeat>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

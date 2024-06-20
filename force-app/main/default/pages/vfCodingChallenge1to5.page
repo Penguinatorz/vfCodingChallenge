@@ -1,0 +1,67 @@
+<!-- Challenge 3-6 -->
+<apex:page controller="vfCodingChallenge1to5CustomController"  language="{!lang}">
+    <header>
+        <apex:stylesheet value="{!$Resource.accStyle}" />
+        <apex:slds />
+    </header>
+
+    <apex:outputLink value="/apex/vfCodingChallenge3PDF">Download Page as PDF</apex:outputLink>
+    <p id="pText">{!$Label.AboutMeVF}</p>
+
+    <apex:form>
+        <apex:pageBlock>
+            <apex:pageMessages id="msg"></apex:pageMessages>
+            <apex:pageBlockSection>
+                <apex:pageBlockTable value="{!accounts}" var="acc">
+                    <apex:column value="{!acc.Name}" />
+                    <apex:column value="{!acc.AnnualRevenue}" />
+                    <apex:column value="{!acc.industry}" />
+                    <apex:column>
+                        <apex:commandLink value="Greeting" action="{!greetAccount}">
+                            <apex:param name="accountId" value="!acc.Id" assignTo="{!accountId}"/>
+                        </apex:commandLink>
+                    </apex:column>
+
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockButtons>
+                <apex:commandButton value="Previous" action="{!previous}" />
+                <apex:commandButton value="Next" action="{!next}" />
+            </apex:pageBlockButtons>
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+
+<!-- Challenge 2
+<apex:page standardController="Account" recordSetVar="accs">
+    <apex:form>
+        <apex:pageBlock>
+            <apex:selectList value="{!filterId}" size="1">
+                <apex:actionSupport event="onchange" reRender="list"/>
+                <apex:selectOptions value="{!listviewoptions}"/>
+            </apex:selectList>
+            <apex:pageBlockSection>
+                <apex:pageBlockTable value="{!accs}" var="acc">
+                     {!acc} is an expression syntax or aka. Variable Binding. Var represents each individual record
+                        <apex:column value="{!acc.Name}"/>
+                        <apex:column value="{!acc.AnnualRevenue}"/>
+                        <apex:column value="{!acc.industry}"/>
+                    </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons>
+                <apex:commandButton value="Previous" action="{!previous}"/>
+                <apex:commandButton value="Next" action="{!next}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+-->
+
+<!--
+Challenge 1
+<apex:page standardController="Account">
+<h1>{!Account.Name}</h1>
+</apex:page>
+-->
