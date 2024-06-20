@@ -1,20 +1,19 @@
 <apex:page standardController="Account" recordSetVar="accs" extensions="vfChallenge9">
     <apex:form>
         <apex:pageBlock>
+            <apex:pageBlockSection columns="2">
+                <apex:pageblockTable value="{!acclist}" var="acc">
 
-            <apex:repeat value="{!accList}" var="acc">
-                <apex:outputText value="Account Name: "/>
-                <apex:outputText value="{!acc.Name}" id="theName"/>
-                <br/>
-                <apex:outputText value="Contacts: "/>                
-                <apex:repeat value="{!acc.Contacts}" var="con">
-                    <apex:outputText value="{!con.Name}" id="theContact"/>
-                    <apex:outputText value=", "/>
-                    <span/>
-                </apex:repeat>
-                <br/>
-                <br/>
-            </apex:repeat>
+                    <apex:column value="{!acc.Name}" />
+                    <apex:column headerValue="Contact Name">
+                        <apex:repeat value="{!acc.Contacts}" var="con">
+                            <apex:outputText value="{!con.Name}" id="theContact" />
+                            <apex:outputText value=", " />
+                            <span/>
+                        </apex:repeat>
+                    </apex:column>
+                </apex:pageblockTable>
+            </apex:pageBlockSection>
         </apex:pageBlock>
     </apex:form>
 </apex:page>
