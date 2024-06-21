@@ -1,23 +1,41 @@
 public with sharing class vfChallenge9 {
     public list<account> acclist {set;get;}   
     public string nameOfAcc {set;get;}
-    public Account acc;
 
+    public ApexPages.StandardSetController ssc{
+        get{
+            if(ssc == null){
+                ssc = new ApexPages.StandardSetController([SELECT Name, (SELECT Id, Name FROM Contacts) FROM Account]);
+            }
+            return ssc;
+        }
+        set;
+    }
     
     public vfChallenge9(ApexPages.StandardController sc) {
-        if (sc != NULL) {
-            this.acc = (Account)sc.getRecord();
-        }
-        searchAcc();
+        populateTable();
     }
     public vfChallenge9(ApexPages.StandardSetController sc) {
-        if (sc != NULL) {
-            this.acc = (Account)sc.getRecord();
-        }
-        searchAcc();
+        populateTable();
+    }
+
+    public void populateTable(){
+        acclist = [SELECT Name, (SELECT Id, Name FROM Contacts) FROM Account];      
     }
 
     public void searchAcc(){
-        acclist = [SELECT Name, (SELECT Id, Name FROM Contacts) FROM Account];      
+        String searchAccoount = '%' + nameOfAcc + '%';
+        acclist = [SELECT Name, (SELECT Id, Name FROM Contacts) FROM Account WHERE Name LIKE :searchAccoount];      
+    }
+
+    public PageReference filterAcc(){
+        String searchAccoount = '%' + nameOfAcc + '%';
+        acclist = [SELECT Name, (SELECT Id, Name FROM Contacts) FROM Account WHERE Name LIKE :searchAccoount];      
+        return Page.vfCodingChallenge9.setRedirect(false);
+    }
+
+    public void saveRecord(){
+
+        update this.ssc.getRecords(); 
     }
 }
