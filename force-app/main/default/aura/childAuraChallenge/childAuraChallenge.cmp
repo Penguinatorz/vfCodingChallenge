@@ -1,0 +1,21 @@
+<aura:component implements="flexipage:availableForAllPageTypes, flexipage:availableForRecordHome" access="global" >
+    <aura:attribute name="enteredText" type="String"/>
+    <aura:attribute name="retrievedValue" type="String"/>
+
+    <aura:registerEvent name="challengeComponentEvent" type="c:compEvent"/>
+    <div aura:id="childComp"/>
+
+    <aura:method name="removeParentText" action="{!c.clearParentText}" access="PUBLIC">
+      <aura:attribute name="retrievedValue" type="String"/>
+    </aura:method>
+    
+    <lightning:card title="Child Component">
+      <div>
+        <!-- Card Body  -->
+        <div class="slds-box slds-p-around_medium">
+            <lightning:input aura:id="name" value ="{!v.enteredText}" />
+            <lightning:button class="slds-m-top_small" variant="brand" label="Submit" onclick="{! c.handleClick }"/>
+        </div>
+      </div>
+    </lightning:card>
+</aura:component>

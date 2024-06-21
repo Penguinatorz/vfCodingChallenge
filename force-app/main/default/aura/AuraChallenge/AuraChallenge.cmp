@@ -1,0 +1,26 @@
+<!--
+Aura Challenge
+Create two Aura components, one child and one parent, 
+that showcases your ability to create component communication. 
+The child component should contain a text input box and a button. 
+When the user clicks the button, the input text should be passed to the parent component. 
+The parent component receives messages from the child and prints them out in a list. 
+We should have a button on the parent that calls a function in our child component - 
+this function should clear the value of our input box.
+
+-->
+
+<aura:component implements="flexipage:availableForAllPageTypes, flexipage:availableForRecordHome" access="global" >
+    <aura:attribute name="retrievedValue" type="String" />
+    <aura:handler name="challengeComponentEvent" event="c:compEvent" action="{!c.receiveEvent}"/>    
+    
+    <lightning:card title="Parent Component">
+        <div class="slds-box slds-p-around_medium">
+            <p>Entered Value received from child component: {!v.retrievedValue}</p>
+            <ui:button label="Remove Text" press="{!c.clearText}"></ui:button>
+
+            </div>
+    </lightning:card>
+
+    <c:childAuraChallenge retrievedValue="{!v.retrievedValue}"  aura:id="childComp"/>
+</aura:component>
